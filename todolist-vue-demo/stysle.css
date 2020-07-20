@@ -1,0 +1,32 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.box {
+    width: 700px;
+    margin: auto;
+}
+
+.btn_completed,
+.btn_unf {
+    width: 100px;
+    height: 30px;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.selected {
+    color: red;
+}
+
+.empty {
+    border-color: red;
+}

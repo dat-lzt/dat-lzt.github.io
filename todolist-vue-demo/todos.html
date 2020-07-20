@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todoList</title>
+    <!-- <link rel="stylesheet" href="./stysle.css"> -->
+</head>
+
+<body>
+    <div class="box">
+        <div id="todo-app">
+            <div>
+                <input type="button" value="全部标为完成" @click="markAllAsCompleted">
+                <input type="button" value="全部标为未完成" @click="markAllAsUnCompleted">
+                <input type="text" v-bind:class='{empty: emptyChecked}' placeholder="添加 todo" v-focus="true" v-model="newTodoTitle" @keyup.enter="addTodo">
+                <span v-if="emptyChecked" style="color: red">请输入内容！</span>
+            </div>
+            <ul>
+                <li v-for='todo in filteredTodos' :key='todo.id'>
+                    <input class="btn_completed" type="button" v-if="!todo.completed" value="标为完成" @click="markAsCompleted(todo)">
+                    <input class="btn_unf" v-else type="button" value="标为未完成" @click="markAsUnCompleted(todo)">
+                    <span :class="{completed: todo.completed}" @dblclick='editTodo(todo)'>{{ todo.title }}</span>
+                    <input type="button" value="删除" @click="removeTodo(todo)">
+                    <input type="text" placeholder="编辑 todo..." v-focus="true" v-if="editedTodo !==null && editedTodo.id===todo.id" v-model="todo.title" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)">
+                    <!-- <input v-if="todo.editingTodo" type="text" placeholder="编辑 todo..." v-model="editedTodo" @keyup.enter="editDone(todo)" @keyup.esc="cancelEdit(todo)"> -->
+                </li>
+                <!-- <li>
+                <span>项目</span>
+                <input type="button" value="标为完成">
+                <input type="button" value="完成">
+                <input type="text" value="编辑 todo...">
+            </li>
+            <li>
+                <span>学习 Vuetwo</span>
+                <input type="button" value="标为完成">
+                <input type="button" value="完成">
+                <input type="text" value="编辑 todo...">
+            </li> -->
+            </ul>
+
+            <div>
+                <span>剩余 {{ leftTodosCount }} 项未完成 -----</span>
+                <span>已完成 {{ completedCount }} 项</span><br/>
+                <span>筛选：
+                <input type="button" :class="{selected:intention == 'all'}" value="全部" @click="intention='all'">
+                <input type="button" :class="{selected:intention == 'ongoing'}" value="进行中" @click="intention='ongoing'">
+                <input type="button" :class="{selected:intention == 'completed'}" value="已完成" @click="intention='completed'">
+                <input type="button" value="清除已完成" @click="clearCompleted">
+                <input type="button" value="清除全部" @click="clearAll">
+            </span>
+            </div>
+            <!-- <input type="text" v-bind:class='{empty: !count}' v-model="value">
+        <input type="button" value="发送" v-on:click="send">
+        <div>value 的值是：{{ value }}</div>
+        <div v-if="count">value 字数：{{ count }}</div> -->
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="./todos.js"></script>
+
+</body>
+
+</html>
