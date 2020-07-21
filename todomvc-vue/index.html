@@ -43,18 +43,18 @@
             <span class="todo-count"> <strong>{{ leftTodosCount }}</strong> 项未完成 </span>
             <ul class="filters">
                 <li>
-                    <a :class="{selected:filterText === 'all'}" href="#/" @click="filterText='all'" >All</a>
+                    <a :class="{selected:filterText === 'all'}" href="#/" @click="aa=true,bb=false,cc=false,filterText='all'" >All</a>
                 </li>
                 <li>
-                    <a :class="{selected:filterText === 'active'}" href="#/active" @click="filterText='active'" >Active</a>
+                    <a :class="{selected:filterText === 'active'}" href="#/active" @click="bb=true,aa=false,cc=false,filterText='active'" >Active</a>
                 </li>
                 <li>
-                    <a :class="{selected:filterText === 'completed'}" href="#/completed" @click="filterText='completed'">Completed</a>
+                    <a :class="{selected:filterText === 'completed'}" href="#/completed" @click="aa=false,bb=false,cc=true,filterText='completed'">Completed</a>
                 </li>
             </ul>
-            <button v-if="todos.some(item => item.completed)" class="clear-completed" @click = "handleClearCompleted">Clear completed</button>
-            <!-- <button v-else-if="todos.some(item => !item.completed)" class="clear-completed" @click = "handleClearCompleted">Clear active</button>
-            <button v-else class="clear-completed" @click = "handleClearCompleted">Clear completed</button> -->
+            <button v-if="aa" class="clear-completed" @click = "clearAll">Clear All</button>
+            <button v-if="bb" class="clear-completed" @click = "handleClearActive">Clear active</button>
+            <button v-if="cc" class="clear-completed" @click = "handleClearCompleted">Clear completed</button>
         </footer>
        </template>
     </section>

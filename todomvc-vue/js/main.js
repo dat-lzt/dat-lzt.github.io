@@ -42,6 +42,9 @@ var todoStorage = {
             todoText: '',
             currentEditting: null, //用于暂存编辑前的todo状态
             filterText: 'all',
+            aa: false,
+            bb: false,
+            cc: false,
         },
         methods: {
             handleNewTodo() {
@@ -90,7 +93,16 @@ var todoStorage = {
             },
             clearAll() {
                 return this.todos = []
+            },
+            handleClearActive() {
+                for (var i = 0; i < this.todos.length; i++) {
+                    if (!this.todos[i].completed) {
+                        this.todos.splice(i, 1)
+                        i--
+                    }
+                }
             }
+
         },
         computed: {
 
