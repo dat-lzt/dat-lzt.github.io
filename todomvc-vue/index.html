@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div-todomvc</title>
+    <!-- <link rel="stylesheet" href="./common/base.css"> -->
+    <!-- <link rel="stylesheet" href="./common/index.css"> -->
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="app" class="todoapp">
+        <header class="header">
+            <h1> {{ message }} </h1>
+            <input class="new-todo" v-model="todoText" placeholder="What needs to be done?" @keydown.enter="handleNewTodo" v-focus="true">
+        </header>
+        <template v-show="todos.length">
+           <section class="main">
+           <input id="toggle-all" v-model="toggleAllStat" class="toggle-all" type="checkbox">
+           <label for="toggle-all">Mark all as complete</label>
+           <ul class="todo-list">
+               <li v-for="(item,index) in filterTodos" :class = "{completed:item.completed,editing:currentEditting === item}">
+                   <div class="view">
+                       <input type="checkbox" class="toggle"  v-model="item.completed">
+                       <label @dblclick="handleGetEdittingDblclick(item)" v-focus="true">
+                           {{ item.title }}
+                       </label>
+                       <button class="destroy" @click = "handleRemoveTodo(index)"></button>
+                   </div>
+                   <input type="text" class="edit"  :value="item.title" 
+                   @keydown.enter="handleSaveEdit(item,index,$event)"
+                   @keydown.esc="handleCanceEditEsc">
+               </li>
+           </ul>
+           </section>
+           <footer class="footer">
+            <span class="todo-count"> <strong>{{ leftTodosCount }}</strong> 项未完成 </span>
+            <ul class="filters">
+                <li>
+                    <a :class="{selected:filterText === 'all'}" href="#/" @click="filterText='all'" >All</a>
+                </li>
+                <li>
+                    <a :class="{selected:filterText === 'active'}" href="#/active" @click="filterText='active'" >Active</a>
+                </li>
+                <li>
+                    <a :class="{selected:filterText === 'completed'}" href="#/completed" @click="filterText='completed'">Completed</a>
+                </li>
+            </ul>
+            <button v-if="todos.some(item => item.completed)" class="clear-completed" @click = "handleClearCompleted">Clear completed</button>
+            <!-- <button v-else-if="todos.some(item => !item.completed)" class="clear-completed" @click = "handleClearCompleted">Clear active</button>
+            <button v-else class="clear-completed" @click = "handleClearCompleted">Clear completed</button> -->
+        </footer>
+       </template>
+    </section>
+    <footer class="info">
+
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
