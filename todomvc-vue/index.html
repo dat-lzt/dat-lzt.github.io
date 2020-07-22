@@ -27,14 +27,15 @@
            <ul class="todo-list">
                <li v-for="(item,index) in filterTodos" :class = "{completed:item.completed,editing:currentEditting === item}">
                    <div class="view">
-                       <input type="checkbox" class="toggle"  v-model="item.completed">
-                       <label @dblclick="handleGetEdittingDblclick(item)" v-focus="true">
+                       <input  type="checkbox" class="toggle"  v-model="item.completed">
+                       <label  @dblclick="handleGetEdittingDblclick(item)" >
                            {{ item.title }}
                        </label>
                        <button class="destroy" @click = "handleRemoveTodo(index)"></button>
                    </div>
-                   <input type="text" class="edit"  :value="item.title" 
+                   <input v-show="isEditingPipeLineName" type="text" class="edit"  :value="item.title" 
                    @keydown.enter="handleSaveEdit(item,index,$event)"
+                   @blur="handleSaveEdit(item,index,$event)"
                    @keydown.esc="handleCanceEditEsc">
                </li>
            </ul>

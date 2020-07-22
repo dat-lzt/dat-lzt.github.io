@@ -67,6 +67,16 @@ var todoStorage = {
             },
             handleGetEdittingDblclick(todo) {
                 this.currentEditting = todo;
+
+                //Vue存在DOM更新周期，使用$nextTick立即触发
+                this.isEditingPipeLineName = true;
+                this.$nextTick(() => {
+                    //遍历全部
+                    let edit = document.querySelectorAll('.edit');
+                    edit.forEach((element) => {
+                        element.focus();
+                    })
+                });
             },
             handleSaveEdit(todo, index, e) {
                 //获取文本框数据
@@ -101,8 +111,7 @@ var todoStorage = {
                         i--
                     }
                 }
-            }
-
+            },
         },
         computed: {
 
@@ -163,5 +172,6 @@ var todoStorage = {
                 }
             }
         }
+
     }).$mount('#app')
 })()
