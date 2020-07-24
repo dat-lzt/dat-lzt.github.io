@@ -1,7 +1,6 @@
 import './assets/css/base.css'
 import './assets/css/index.css'
 
-
 var $ = function(sel) {
     return document.querySelector(sel);
 };
@@ -97,7 +96,7 @@ function updateTodo(itemId, completed) {
 function removeTodo(itemId) {
     var todoList = $('.todo-list');
     var item = $('#' + itemId);
-    //DOM操作，删除列表中的第一个项目
+    //DOM操作，删除列表中的一个项目
     todoList.removeChild(item);
     update();
 }
@@ -157,12 +156,6 @@ function update() {
     //计数：未完成个数
     var items = $All('.todo-list li');
     var filter = $('.filters li a.selected').innerHTML;
-    var btn1 = document.getElementById('clear-all');
-    var btn2 = document.getElementById('clear-active');
-    var btn3 = document.getElementById('clear-completed');
-    btn1.style.visibility = 'hidden';
-    btn2.style.visibility = 'hidden';
-    btn3.style.visibility = 'hidden';
     var leftNum = 0;
     for (var i = 0; i < items.length; ++i) {
         var item = items[i];
@@ -173,33 +166,37 @@ function update() {
         var display = 'none';
         if (filter == 'All') {
             display = 'block';
-            btn1.style.visibility = 'visible';
-            btn2.style.visibility = 'hidden';
-            btn3.style.visibility = 'hidden';
         } else if (filter == 'Active' && !item.classList.contains(CL_COMPLETED)) {
             display = 'block';
-            btn1.style.visibility = 'hidden';
-            btn2.style.visibility = 'visible';
-            btn3.style.visibility = 'hidden';
         }
         if (filter == 'Completed' && item.classList.contains(CL_COMPLETED)) {
             display = 'block';
-            btn1.style.visibility = 'hidden';
-            btn2.style.visibility = 'hidden';
-            btn3.style.visibility = 'visible';
         }
         item.style.display = display;
-
         // console.log(item.style.display);
     }
     var count = $('.todo-count');
     count.innerHTML = (leftNum || 'No') + (leftNum > 1 ? ' items' : ' item') + ' left';
-
-    // var toggleAll = $('toggle-all');
-    // toggleAll.style.visibility = items.length > 0 ? 'visible' : 'hidden';
-    // toggleAll.checked = items.length == completedNum;
 }
 
+//点击filters元素中的a元素时更改相应button的切换
+function bttonChange() {
+    var filters = $All('.filters li ');
+    //获得下面内容div的数组
+    var Btn = document.getElementsByClassName('clear-completed');
+    for (var i = 0; i < filters.length; ++i) {
+        filters[i].num = i; //赋值用于标记
+        filters[i].addEventListener('click', function() {
+            //先全部隐藏
+            for (var j = 0; j < Btn.length; j++) {
+                Btn[j].style.display = 'none';
+            }
+            Btn[this.num].style.display = 'block';
+            console.log('btn' + Btn[this.num]);
+            // update();
+        });
+    }
+}
 
 window.onload = function init() {
     var newTodo = $('.new-todo'); // todo
@@ -213,7 +210,7 @@ window.onload = function init() {
         }
         addTodo(todoText);
         newTodo.value = '';
-    });
+    }, newTodo.focus());
     //清除全部事件
     var clearAll = document.getElementById('clear-all');
     clearAll.addEventListener('click', function() {
@@ -249,9 +246,10 @@ window.onload = function init() {
                     filters[j].classList.remove(CL_SELECTED);
                 }
                 filter.classList.add(CL_SELECTED);
+                bttonChange();
                 update();
             });
         })(filters[i])
-    }
+    };
     update();
 };
