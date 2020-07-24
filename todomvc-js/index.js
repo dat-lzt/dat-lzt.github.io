@@ -103,6 +103,7 @@ function removeTodo(itemId) {
 }
 //清除已完成事件
 function ClearCompleted() {
+    var todoList = $('.todo-list');
     var items = todoList.querySelectorAll('li');
     for (var i = items.length - 1; i >= 0; --i) {
         var item = items[i];
@@ -112,37 +113,93 @@ function ClearCompleted() {
     }
     update();
 }
+
+function ClearAll() {
+    var todoList = $('.todo-list');
+    var items = todoList.querySelectorAll('li');
+    for (var i = items.length - 1; i >= 0; --i) {
+        var item = items[i];
+        todoList.removeChild(item);
+    }
+    update();
+}
+
+function ClearActive() {
+    var todoList = $('.todo-list');
+    var items = todoList.querySelectorAll('li');
+    for (var i = items.length - 1; i >= 0; --i) {
+        var item = items[i];
+        if (!item.classList.contains(CL_COMPLETED)) {
+            todoList.removeChild(item);
+        }
+    }
+    update();
+
+}
 //全部标记为完成
-// function toggleAllTodoList() {
-//     var items = $All('.todo-list li');
-//     var toggleAll = $('.toggle-all');
-//     var checked = toggleAll.checked;
-//     for (var i = 0; i < items.length; ++i) {
-//         var item = items[i];
-//         var toggle = item.querySelector('.toggle');
-//         if (toggle.checked != checked) {
-//             toggle.checked = false;
-//             if (checked) item.classList.add(CL_COMPLETED);
-//             else item.classList.remove(CL_COMPLETED);
-//         }
-//     }
-// }
+function toggleAllTodoList() {
+    var items = $All('.todo-list li');
+    var toggleAll = $('.toggle-all');
+    var checked = toggleAll.checked;
+    for (var i = 0; i < items.length; ++i) {
+        var item = items[i];
+        var toggle = item.querySelector('.toggle');
+        if (toggle.checked != checked) {
+            toggle.checked = checked;
+            if (checked) item.classList.add(CL_COMPLETED);
+            else item.classList.remove(CL_COMPLETED);
+        }
+    }
+    update();
+}
 
 function update() {
     //计数：未完成个数
     var items = $All('.todo-list li');
+    var filter = $('.filters li a.selected').innerHTML;
+    var btn1 = document.getElementById('clear-all');
+    var btn2 = document.getElementById('clear-active');
+    var btn3 = document.getElementById('clear-completed');
+    btn1.style.visibility = 'hidden';
+    btn2.style.visibility = 'hidden';
+    btn3.style.visibility = 'hidden';
     var leftNum = 0;
     for (var i = 0; i < items.length; ++i) {
         var item = items[i];
         //contains用做判断返回值是ture还是false
-        if (!item.classList.contains(CL_COMPLETED)) {
+        if (!item.classList.contains(CL_COMPLETED))
             leftNum++;
+
+        var display = 'none';
+        if (filter == 'All') {
+            display = 'block';
+            btn1.style.visibility = 'visible';
+            btn2.style.visibility = 'hidden';
+            btn3.style.visibility = 'hidden';
+        } else if (filter == 'Active' && !item.classList.contains(CL_COMPLETED)) {
+            display = 'block';
+            btn1.style.visibility = 'hidden';
+            btn2.style.visibility = 'visible';
+            btn3.style.visibility = 'hidden';
         }
+        if (filter == 'Completed' && item.classList.contains(CL_COMPLETED)) {
+            display = 'block';
+            btn1.style.visibility = 'hidden';
+            btn2.style.visibility = 'hidden';
+            btn3.style.visibility = 'visible';
+        }
+        item.style.display = display;
+
+        // console.log(item.style.display);
     }
     var count = $('.todo-count');
     count.innerHTML = (leftNum || 'No') + (leftNum > 1 ? ' items' : ' item') + ' left';
 
+    // var toggleAll = $('toggle-all');
+    // toggleAll.style.visibility = items.length > 0 ? 'visible' : 'hidden';
+    // toggleAll.checked = items.length == completedNum;
 }
+
 
 window.onload = function init() {
     var newTodo = $('.new-todo'); // todo
@@ -157,18 +214,44 @@ window.onload = function init() {
         addTodo(todoText);
         newTodo.value = '';
     });
+    //清除全部事件
+    var clearAll = document.getElementById('clear-all');
+    clearAll.addEventListener('click', function() {
+        ClearAll();
+        update();
+    });
 
     //清除已完成事件
-    var clearCompleted = $('.clear-completed');
+    var clearCompleted = document.getElementById('clear-completed');
     clearCompleted.addEventListener('click', function() {
         ClearCompleted();
+        update();
+    });
+    //清除未完成事件
+    var clearActive = document.getElementById('clear-active');
+    clearActive.addEventListener('click', function() {
+        ClearActive();
+        update();
     });
 
     //全部标记为完成
-    // var toggleAll = $('.toggle-all');
-    // toggleAll.addEventListener('change', function() {
-    //     toggleAllTodoList();
-    //     console.log(toggleAllTodoList);
-    // });
+    var toggleAll = $('.toggle-all');
+    toggleAll.addEventListener('change', function() {
+        toggleAllTodoList();
+    });
+
+    //判断点击了哪个按钮并给出点击样式
+    var filters = $All('.filters li a');
+    for (var i = 0; i < filters.length; ++i) {
+        (function(filter) {
+            filter.addEventListener('click', function() {
+                for (var j = 0; j < filters.length; ++j) {
+                    filters[j].classList.remove(CL_SELECTED);
+                }
+                filter.classList.add(CL_SELECTED);
+                update();
+            });
+        })(filters[i])
+    }
     update();
 };

@@ -16,7 +16,7 @@
             <input class="new-todo" placeholder="What needs to be done?" autofocus>
         </header>
         <section class="main">
-            <input class="toggle-all" type="checkbox">
+            <input id="toggle-all" class="toggle-all" type="checkbox">
             <label for="toggle-all"></label>
             <ul class="todo-list">
                 <!-- <li class="completed">
@@ -44,13 +44,15 @@
                     <a class="selected" href="#/">All</a>
                 </li>
                 <li>
-                    <a href="#/active">Active</a>
+                    <a class="" href="#/active">Active</a>
                 </li>
                 <li>
-                    <a href="#/completed">Completed</a>
+                    <a class="" href="#/completed">Completed</a>
                 </li>
             </ul>
-            <button class="clear-completed">Clear completed</button>
+            <button id="clear-all" class="clear-completed">Clear All</button>
+            <button id="clear-active" class="clear-completed">Clear active</button>
+            <button id="clear-completed" class="clear-completed">Clear completed</button>
         </footer>
     </section>
     <script src="./index.js"></script>
