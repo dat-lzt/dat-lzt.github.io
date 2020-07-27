@@ -1,5 +1,5 @@
-import './assets/css/base.css'
-import './assets/css/index.css'
+// import './assets/css/base.css'
+// import './assets/css/index.css'
 
 var $ = function(sel) {
     return document.querySelector(sel);
