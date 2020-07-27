@@ -179,6 +179,23 @@ function update() {
     count.innerHTML = (leftNum || 'No') + (leftNum > 1 ? ' items' : ' item') + ' left';
 }
 
+//判断点击了哪个按钮并给出点击样式
+function buttonStyleChange() {
+    var filters = $All('.filters li a');
+    for (var i = 0; i < filters.length; ++i) {
+        filters[i].num = i;
+        // (function(filter) {
+        filters[i].addEventListener('click', function() {
+            for (var j = 0; j < filters.length; ++j) {
+                filters[j].classList.remove(CL_SELECTED);
+            }
+            filters[this.num].classList.add(CL_SELECTED);
+            bttonChange();
+            // update();
+        });
+        // })(filters[i])
+    }
+}
 //点击filters元素中的a元素时更改相应button的切换
 function bttonChange() {
     var filters = $All('.filters li ');
@@ -193,7 +210,7 @@ function bttonChange() {
             }
             Btn[this.num].style.display = 'block';
             console.log('btn' + Btn[this.num]);
-            // update();
+            //update();
         });
     }
 }
@@ -238,18 +255,7 @@ window.onload = function init() {
     });
 
     //判断点击了哪个按钮并给出点击样式
-    var filters = $All('.filters li a');
-    for (var i = 0; i < filters.length; ++i) {
-        (function(filter) {
-            filter.addEventListener('click', function() {
-                for (var j = 0; j < filters.length; ++j) {
-                    filters[j].classList.remove(CL_SELECTED);
-                }
-                filter.classList.add(CL_SELECTED);
-                bttonChange();
-                update();
-            });
-        })(filters[i])
-    };
+    buttonStyleChange();
+
     update();
 };
