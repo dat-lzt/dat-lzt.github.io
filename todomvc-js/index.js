@@ -191,7 +191,7 @@ function buttonStyleChange() {
             }
             filters[this.num].classList.add(CL_SELECTED);
             bttonChange();
-            // update();
+            update();
         });
         // })(filters[i])
     }
