@@ -278,7 +278,6 @@ function update() {
         toggleAll.checked = false;
     }
 
-
     var count = $('.todo-count');
     count.innerHTML = (activeCount || 'No') + (activeCount > 1 ? ' items' : ' item') + ' left';
 }
