@@ -1,0 +1,144 @@
+:root {
+    --box-shadow: 0px 1px 3px 4px rgba(142, 142, 196, 0.2), 0px 1px 3px 4px rgba(0, 0, 255, .2);
+    --plus-color: #c0392b;
+    --minus-color: #2ecc71;
+    --delete: #e74c3c;
+    --addBtn: #9c88ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul li {
+    list-style: none;
+}
+
+.container {
+    margin: 30px auto;
+    width: 350px;
+}
+
+h3 {
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin: 40px 0 12px;
+}
+
+.inc-exp-container {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.inc-exp-container>div {
+    flex: 1;
+    text-align: center;
+}
+
+.inc-exp-container>div:first-of-type {
+    border-right: 2px solid #333;
+}
+
+.money {
+    font-size: 20px;
+    margin: 6px 0;
+}
+
+.money.plus {
+    color: var(--plus-color);
+}
+
+.money.minus {
+    color: var(--minus-color);
+}
+
+label {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    display: block;
+    border: 2px solid #dedede;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+}
+
+.addBtn {
+    cursor: pointer;
+    background-color: var(--addBtn);
+    box-shadow: var(--box-shadow);
+    color: #fff;
+    border: none;
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 30px;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.list {
+    margin-bottom: 40px;
+}
+
+.list li {
+    position: relative;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.list .minus {
+    border-right: 5px solid var(--minus-color);
+}
+
+.list .plus {
+    border-right: 5px solid var(--plus-color);
+}
+
+.delete {
+    cursor: pointer;
+    background-color: var(--delete);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 1.8px 5px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%);
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.list li:hover .delete {
+    opacity: 1;
+    outline: none;
+}
