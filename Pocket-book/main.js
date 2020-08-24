@@ -60,7 +60,6 @@ function updataMoney() {
 
     //使用reduce()函数得到余额
     const total = (amounts.reduce((acc, item) => (acc += item), 0)).toFixed(2);
-    console.log(total);
 
     //收入
     const inc = amounts
@@ -88,6 +87,9 @@ function addData(e) {
     //验证输入框是否为空
     if (text.value.length == "" || amount.value.length == "") {
         alert("请输入名称或者金额");
+    }
+    if (Number(amount.value) == 0) {
+        amount.value = "";
     } else {
         const data = {
             id: generateId(),
