@@ -1,37 +1,34 @@
 ## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/dat-lzt/dat-lzt.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
 ### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Git基础操作
 ```
+远程仓库
+1、绑定github中的使用名和邮箱：        git config --global user.name "dat-lzt"                            git config --global user.email "...@qq.com"
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+2、从远程下拉远程仓库到本地：git clone 
 
-### Jekyll Themes
+3、将本地文件上载至暂存区：git add
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/dat-lzt/dat-lzt.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+4、将存在暂存区的文件提交至本地仓库：git commit -m “add message”(全部提交)
 
-### Support or Contact
+5、远程提交：git push
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+6、本地远程更新：git pull
+```
+```
+本地仓库:
+1、初始化创建本地仓库： git init
+
+2、查看仓库状态； git status
+
+3、添加到本地暂存区： git add
+
+4、将文件从暂存区添加到本地仓库：git commit -m "备注"
+
+5、删除仓库中的文件：git rm -- **
+
+6、撤销之前的所有 git add 操作，即在暂存区的修改: git reset
+
+
+```
