@@ -12,7 +12,6 @@ class App extends Component {
       <div className="App">
       <Btn/>
       <Main />
-      <Route exact path="/todolist" component={New} />
       </div>
      </HashRouter>
     );
