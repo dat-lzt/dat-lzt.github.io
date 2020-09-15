@@ -15,6 +15,16 @@
 5、远程提交：git push
 
 6、本地远程更新：git pull
+
+7、只删除远程仓库，不删除本地仓库：
+   git pull # 将远程仓库里面的项目拉下来
+   
+   git rm -r --cached target # 删除你要删除的文件名称，这里是删除target文件加(本地文件并不会被删除)
+   
+   git commit -m "删除了target"
+   
+   git push
+   
 ```
 ```
 本地仓库:
