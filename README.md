@@ -42,3 +42,17 @@
 
 
 ```
+```
+VsCode插件(常用):
+
+1、open in browser ---- 在浏览器中打开
+2、Bracket Pair Colorizer ---- 支架对着色器
+3、Code Runner ---- 代码运行器
+4、Auto Rename Tag ---- 自动重命名标签
+5、CSS Peek ---- CSS速览
+6、File Peek ---- 文件浏览
+7、ES7 React/Redux/GraphQL/React-Native snippets
+   ----  该扩展为您提供ES7中的JavaScript和React / Redux片段，以及针对VS Code的Babel插件功能
+8、Reactjs code snippets ---- React.js代码片段
+
+```
